@@ -4,6 +4,9 @@ let guest_btn = document.getElementsByClassName("guest_btn");
 let h_fouls_btn = document.getElementById("h_fouls_btn");
 let g_fouls_btn = document.getElementById("g_fouls_btn");
 
+let btn_pause = document.getElementById("pause_btn");
+let btn_resume = document.getElementById("resume_btn");
+
 function disable_btn() {
   for (let i = 0; i < home_btn.length; i++) {
     home_btn[i].disabled = true;
@@ -11,9 +14,11 @@ function disable_btn() {
   }
   h_fouls_btn.disabled = true;
   g_fouls_btn.disabled = true;
+
+  btn_pause.style.display = "none";
+  btn_resume.style.display = "none";
 }
 disable_btn();
-
 
 // Functions for sum one number, two number.....
 let home = document.getElementById("home");
@@ -67,7 +72,6 @@ function guestFouls_btn() {
   guest_fouls_btn.textContent = guest_fouls;
 }
 
-
 const startButton = document.getElementById("start_btn");
 const pause_btn = document.getElementById("pause_btn");
 const resume_btn = document.getElementById("resume_btn");
@@ -90,7 +94,7 @@ function startTimer() {
     timerInterval = setInterval(() => {
       timeLeft--; // Math.floor it is a function that can rounds a number. example(3.9) ---> 4
       timer.textContent = `${Math.floor(timeLeft / 60)}:${String(
-        timeLeft % 60 
+        timeLeft % 60
       ).padStart(2, "0")}`; // padStart returns 01,02,03....
 
       if (timeLeft === 0) {
@@ -108,12 +112,16 @@ function startTimer() {
 
 // Pause Function, it can pause the timer.
 function pauseTimer() {
+  btn_pause.style.display = "none";
+  btn_resume.style.display = "inline-block";
   clearInterval(timerInterval);
   remainingTime = timeLeft;
 }
 
 // When button Start click, timer Start it.
 startButton.addEventListener("click", function () {
+  document.getElementById("start_btn").style.display = "none";
+  btn_pause.style.display = "inline-block";
   preiod += 1;
   preiod_screen.textContent = preiod;
 
@@ -135,12 +143,14 @@ pause_btn.addEventListener("click", function () {
 
 // Resume Function that can resume the timer.
 resume_btn.addEventListener("click", function () {
+  btn_resume.style.display = "none";
+  btn_pause.style.display = "inline-block";
   timeLeft = remainingTime;
   resume_btn.disabled = true;
   startTimer();
 });
 
-// When click reset button all data remove, without period counter. 
+// When click reset button all data remove, without period counter.
 reset_btn.addEventListener("click", function () {
   clearInterval(timerInterval);
   timeLeft = 0;
