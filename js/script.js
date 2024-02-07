@@ -138,6 +138,12 @@ startButton.addEventListener("click", function () {
 
 pause_btn.addEventListener("click", function () {
   resume_btn.disabled = false;
+  for (let i = 0; i < home_btn.length; i++) {
+    home_btn[i].disabled = true;
+    guest_btn[i].disabled = true;
+  }
+  h_fouls_btn.disabled = true;
+  g_fouls_btn.disabled = true;
   pauseTimer();
 });
 
@@ -145,6 +151,13 @@ pause_btn.addEventListener("click", function () {
 resume_btn.addEventListener("click", function () {
   btn_resume.style.display = "none";
   btn_pause.style.display = "inline-block";
+  for (let i = 0; i < home_btn.length; i++) {
+    home_btn[i].disabled = false;
+    guest_btn[i].disabled = false;
+  }
+  h_fouls_btn.disabled = false;
+  g_fouls_btn.disabled = false;
+
   timeLeft = remainingTime;
   resume_btn.disabled = true;
   startTimer();
