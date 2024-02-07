@@ -152,6 +152,9 @@ resume_btn.addEventListener("click", function () {
 
 // When click reset button all data remove, without period counter.
 reset_btn.addEventListener("click", function () {
+  document.getElementById("start_btn").style.display = "inline-block";
+  btn_pause.style.display = "none";
+  btn_resume.style.display = "none";
   clearInterval(timerInterval);
   timeLeft = 0;
   homeScore = 0;
